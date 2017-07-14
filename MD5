@@ -1,0 +1,9 @@
+2df3d0edddee51ec48d3c786efef0a82 *DESCRIPTION
+31fd62d86d2cdbec5d1cf8ce5b3ac762 *NAMESPACE
+1af85ee3b1458f9d572c56bdf5a4cf08 *R/Bland-Altman-Bib-plot_base_graphics_function.R
+a5ee340db19e2cc73b3d1bbca4b3fc8d *R/datasets.R
+75ef38bfd24f6312c7c64232e37a6f82 *R/percentiles_scatter_plot.R
+bcb699a3cdd488838d626f60bc7668e1 *data/example_researcher.RData
+a97646c1aac16d2b22adf036d55c54b0 *man/BlandAltmanBibPlot.Rd
+5914e8b6355a821a5be4d277acc792ac *man/example_researcher.Rd
+c275f6f627dde2275d8ced7a83c1b3df *man/jpscatter.Rd
