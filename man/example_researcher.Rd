@@ -2,7 +2,7 @@
 % Please edit documentation in R/example_researcher_dataset.R
 \name{example_researcher}
 \alias{example_researcher}
-\title{Example data set from publication for scatter plot and Bland Altman plot}
+\title{Example data set from publication for scatter plot and difference against mean plot}
 \description{
 Contains the data set (\code{example_researcher}).
 }

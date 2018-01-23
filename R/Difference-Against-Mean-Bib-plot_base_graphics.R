@@ -1,42 +1,44 @@
 #
-# Bland-Altman-Bib-plot_base_graphics.R
+# Difference-Against-Mean-Bib-plot_base_graphics.R
 # Author: Dr. Robin Haunschild
 # Version: 0.0.1
 # Date: 07/10/2017
 #
 
-#' @title Create a Bland-Altman plot using journal and paper percentile values
+#' @title Create a difference against mean plot using journal and paper percentile values
 #'
 #' @description
 #' Provide journal and paper percentile values in a data frame, e.g. df,
-#' and the function call BlandAltmanBibPlot(df) creates the Bland-Altman plot.
-#' BlandAltmanBibPlot takes some optional arguments to modify its behaviour, see arguments and details.
+#' and the function call DAMBibPlot(df) creates the difference against mean plot.
+#' DAMBibPlot takes some optional arguments to modify its behaviour, see arguments and details.
 #'
 #' @details
-#' BlandAltmanBibPlot(df=data_frame, off_set=numeric_value, print_stats=boolean, do_plot=boolean)
+#' DAMBibPlot(df=data_frame, off_set=numeric_value, print_stats=boolean, do_plot=boolean)
 #' Only the argument df is necessary. All other aruments are optional.
 #'
 #' Literature:
 #'
 #' - Bland, J. M., & Altman, D. G. (1986). Statistical Methods for Assessing Agreement between Two Methods of Clinical Measurement. Lancet, 1(8476), 307-310, https://www.ncbi.nlm.nih.gov/pubmed/2868172
 #'
-#' - Bornmann, L., & Haunschild, R. (2017). Plots for visualizing paper impact and journal impact of single researchers in a single graph, https://arxiv.org/abs/1707.04050
+#' Cleveland, W. S. (1985). The elements of graphing data. Monterey, CA: Wadsworth Advanced Books and Software.
+#'
+#' - Bornmann, L., & Haunschild, R. (2017). Plots for visualizing paper impact and journal impact of single researchers in a single graph, DOI: 10.1007/s11192-018-2658-1, preprint: https://arxiv.org/abs/1707.04050
 #'
 #'
-#' An example data frame is provided as \code{example_researcher} in the package. It can be used to create a Bland-Altman plot using default values.
+#' An example data frame is provided as \code{example_researcher} in the package. It can be used to create a difference against mean plot using default values.
 #'
 #' @examples
 #'
 #' data(example_researcher)
 #'
-#' BlandAltmanBibPlot(example_researcher)
+#' DAMBibPlot(example_researcher)
 #'
 #' @param df data frame with journal and paper percentiles
 #' @param off_set determines the location of additional plotted information (number of points in each
 #' quadrant), values between 0 and 40 might be useful (optional parameter). The default value is 0.
 #' @param print_stats boolean variable (optional parameter) which determines if the additional statistical values are printed
 #' to the R console (T: yes print, F: no do not print). The default value is T.
-#' @param do_plot boolean variable (optional parameter) which determines if the Bland-Altman plot is actually produced
+#' @param do_plot boolean variable (optional parameter) which determines if the difference against mean plot is actually produced
 #' (T: yes plot, F: no do not plot). The default value is T.
 #' @param digits integer value to determine the number of desired digits after the decimal point for statistical values (optional parameter). The default value is 1.
 #' @param ... additional arguments to pass to the \link{plot} function
@@ -44,7 +46,7 @@
 #' @export
 
 
-BlandAltmanBibPlot <- function(df, off_set=0, print_stats=TRUE, do_plot=TRUE, digits=1, ...) {
+DAMBibPlot <- function(df, off_set=0, print_stats=TRUE, do_plot=TRUE, digits=1, ...) {
 
 colnames(df) <- c('jif_perc', 'p_perc')
 df <- df[!is.na(df$p_perc),]
@@ -84,24 +86,24 @@ nr2 <- nq3+nq4
 pr1 <- round(nr1/n*100, digits)
 pr2 <- round(nr2/n*100, digits)
 
-avg1_perc_diff <- mean(df1$perc_diff)
-avg1_perc_avg <- mean(df1$perc_avg)
+avg1_perc_diff <- median(df1$perc_diff)
+avg1_perc_avg <- median(df1$perc_avg)
 avg1 <- data.frame(avg1_perc_avg, avg1_perc_diff)
 
-avg2_perc_diff <- mean(df2$perc_diff)
-avg2_perc_avg <- mean(df2$perc_avg)
+avg2_perc_diff <- median(df2$perc_diff)
+avg2_perc_avg <- median(df2$perc_avg)
 avg2 <- data.frame(avg2_perc_avg, avg2_perc_diff)
 
-avg3_perc_diff <- mean(df3$perc_diff)
-avg3_perc_avg <- mean(df3$perc_avg)
+avg3_perc_diff <- median(df3$perc_diff)
+avg3_perc_avg <- median(df3$perc_avg)
 avg3 <- data.frame(avg3_perc_avg, avg3_perc_diff)
 
-avg4_perc_diff <- mean(df4$perc_diff)
-avg4_perc_avg <- mean(df4$perc_avg)
+avg4_perc_diff <- median(df4$perc_diff)
+avg4_perc_avg <- median(df4$perc_avg)
 avg4 <- data.frame(avg4_perc_avg, avg4_perc_diff)
 
-avg_diff <- mean(df$perc_diff)
-avg_perc <- mean(df$perc_avg)
+avg_diff <- median(df$perc_diff)
+avg_perc <- median(df$perc_avg)
 
 if(do_plot) {
    par(mar = c(5, 6, 4, 2) + 0.1)

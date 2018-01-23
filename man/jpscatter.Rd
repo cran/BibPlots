@@ -34,7 +34,7 @@ Only the argument df is necessary. All other aruments are optional.
 
 Literature:
 
-- Bornmann, L., & Haunschild, R. (2017). Plots for visualizing paper impact and journal impact of single researchers in a single graph, https://arxiv.org/abs/1707.04050
+- Bornmann, L., & Haunschild, R. (2017). Plots for visualizing paper impact and journal impact of single researchers in a single graph, DOI: 10.1007/s11192-018-2658-1, preprint: https://arxiv.org/abs/1707.04050
 
 
 An example data frame is provided as \code{example_researcher} in the package. It can be used to create a scatter plot using default values.

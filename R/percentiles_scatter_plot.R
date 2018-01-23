@@ -18,7 +18,7 @@
 #'
 #' Literature:
 #'
-#' - Bornmann, L., & Haunschild, R. (2017). Plots for visualizing paper impact and journal impact of single researchers in a single graph, https://arxiv.org/abs/1707.04050
+#' - Bornmann, L., & Haunschild, R. (2017). Plots for visualizing paper impact and journal impact of single researchers in a single graph, DOI: 10.1007/s11192-018-2658-1, preprint: https://arxiv.org/abs/1707.04050
 #'
 #'
 #' An example data frame is provided as \code{example_researcher} in the package. It can be used to create a scatter plot using default values.
@@ -69,24 +69,24 @@ nr2 <- nq3+nq4
 pr1 <- round(nr1/n*100, digits)
 pr2 <- round(nr2/n*100, digits)
 
-avg1_jif_perc <- mean(df1$jif_perc)
-avg1_p_perc <- mean(df1$p_perc)
+avg1_jif_perc <- median(df1$jif_perc)
+avg1_p_perc <- median(df1$p_perc)
 avg1 <- data.frame(avg1_p_perc, avg1_jif_perc)
 
-avg2_jif_perc <- mean(df2$jif_perc)
-avg2_p_perc <- mean(df2$p_perc)
+avg2_jif_perc <- median(df2$jif_perc)
+avg2_p_perc <- median(df2$p_perc)
 avg2 <- data.frame(avg2_p_perc, avg2_jif_perc)
 
-avg3_jif_perc <- mean(df3$jif_perc)
-avg3_p_perc <- mean(df3$p_perc)
+avg3_jif_perc <- median(df3$jif_perc)
+avg3_p_perc <- median(df3$p_perc)
 avg3 <- data.frame(avg3_p_perc, avg3_jif_perc)
 
-avg4_jif_perc <- mean(df4$jif_perc)
-avg4_p_perc <- mean(df4$p_perc)
+avg4_jif_perc <- median(df4$jif_perc)
+avg4_p_perc <- median(df4$p_perc)
 avg4 <- data.frame(avg4_p_perc, avg4_jif_perc)
 
-avg_jif_perc <- mean(df$jif_perc)
-avg_p_perc <- mean(df$p_perc)
+avg_jif_perc <- median(df$jif_perc)
+avg_p_perc <- median(df$p_perc)
 
 if(do_plot) {
    par(mar = c(5, 6, 4, 2) + 0.1)

@@ -3,7 +3,8 @@
 importFrom("graphics", "abline", "lines", "mtext", "par", "plot",
              "points", "text")
 importFrom("stats", "spline")
+importFrom("stats","median")
 
-export(BlandAltmanBibPlot)
+export(DAMBibPlot)
 export(jpscatter)
 export(rpys)

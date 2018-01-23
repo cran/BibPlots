@@ -26,7 +26,7 @@ rpys(df, py1, py2, col_cr = "red", col_med = "blue", smoothing = TRUE,
 \item{...}{additional arguments to pass to the \link{plot}, \link{points}, and \link{lines} functions.}
 }
 \description{
-Provide the contents of the CSV file from the CRExplorer in a data frame, e.g. df,
+Provide the contents of the CSV file from the 'CRExplorer' in a data frame, e.g. df,
 and the function call rpys(df, py1, py2) creates the spectrogram.
 Here, py1 and py2 are the lowest and highest publication year to be used in the plot.
 The function rpys takes some optional arguments to modify its behaviour, see arguments and details.
@@ -37,7 +37,7 @@ Only the arguments df, py1, and py2 are necessary. All other aruments are option
 
 Literature:
 
-- Thor, A., Bornmann, L., Marx, W., Haunschild, R., Leydesdorff, L., & Mutz, Ruediger (2017). Website of the free software CRExplorer, http://www.crexplorer.net
+- Thor, A., Bornmann, L., Marx, W., Haunschild, R., Leydesdorff, L., & Mutz, Ruediger (2017). Website of the free software 'CRExplorer', http://www.crexplorer.net
 
 An example data frame is provided as \code{rpys_example_data} in the package. It can be used to create an example spectrogram.
 }

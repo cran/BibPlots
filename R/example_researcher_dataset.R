@@ -1,4 +1,4 @@
-#' Example data set from publication for scatter plot and Bland Altman plot
+#' Example data set from publication for scatter plot and difference against mean plot
 #'
 #' Contains the data set (\code{example_researcher}).
 #'
