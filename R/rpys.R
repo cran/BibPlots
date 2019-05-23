@@ -1,8 +1,8 @@
 #
 # rpys.R
 # Author: Dr. Robin Haunschild
-# Version: 0.0.1
-# Date: 08/30/2017
+# Version: 0.0.2
+# Date: 02/07/2018
 #
 
 #' @title Create a spectrogram using data from the free software CRExplorer
@@ -14,7 +14,7 @@
 #' The function rpys takes some optional arguments to modify its behaviour, see arguments and details.
 #'
 #' @details
-#' rpys(df=data_frame, py1=integer_value, py2=integer_value, smoothing=boolean, col_cr=character_color_name, col_med=character_color_name, par_pch=integer, ...)
+#' rpys(df=data_frame, py1=integer_value, py2=integer_value, smoothing=boolean, col_cr=character_color_name, col_med=character_color_name, par_pch=integer, plot_NCR=boolean, plot_Med=boolean, ...)
 #' Only the arguments df, py1, and py2 are necessary. All other aruments are optional.
 #'
 #' Literature:
@@ -37,10 +37,12 @@
 #' @param col_cr character color name value to determine color of the line and points of the number of cited references (optional parameter). The default value is "red".
 #' @param col_med character color name value to determine color of the line and points of the median deviation (optional parameter). The default value is "blue".
 #' @param par_pch integer value to set the point type (optional parameter). The default value is 20.
+#' @param plot_NCR boolean variable (optional parameter) which determines the NCR curve should be plotted.
+#' @param plot_Med boolean variable (optional parameter) which determines the median deviation curve should be plotted.
 #' @param ... additional arguments to pass to the \link{plot}, \link{points}, and \link{lines} functions.
 #'
 #' @export
-rpys <- function(df, py1, py2, col_cr="red", col_med="blue", smoothing=TRUE, par_pch=20, ...) {
+rpys <- function(df, py1, py2, col_cr="red", col_med="blue", smoothing=TRUE, par_pch=20, plot_NCR=TRUE, plot_Med=TRUE, ...) {
   colnames(df) <- c("Year", "NCR", "Median.5")
   nuller <- (df$Year/df$Year)-1
   df <- df[df$Year<py2+1, ]
@@ -64,10 +66,24 @@ rpys <- function(df, py1, py2, col_cr="red", col_med="blue", smoothing=TRUE, par
     ncr <- data.frame(df$Year, df$NCR)
     med5 <- data.frame(df$Year, df$Median.5)
   }
-  plot(df$Year, df$NCR, type='p', pch=par_pch, col=col_cr, xlim=c(min(df$Year),max(df$Year)), ylim=c(min(df$Median.5), max(df$NCR)), xlab='Cited reference year', ylab='Number of cited references', ...)
-  points(df$Year, df$Median.5, type='p', pch=par_pch, col=col_med, ...)
+  if(plot_NCR && plot_Med) {
+     plot(df$Year, df$NCR, type='p', pch=par_pch, col=col_cr, xlim=c(min(df$Year),max(df$Year)), ylim=c(min(df$Median.5), max(df$NCR)), xlab='Reference publication year', ylab='Number of cited references', ...)
+  }
+  if(plot_NCR && !plot_Med) {
+     plot(df$Year, df$NCR, type='p', pch=par_pch, col=col_cr, xlim=c(min(df$Year),max(df$Year)), ylim=c(min(df$NCR), max(df$NCR)), xlab='Reference publication year', ylab='Number of cited references', ...)
+  }
+  if(!plot_NCR && plot_Med) {
+     plot(df$Year, df$Med, type='p', pch=par_pch, col=col_med, xlim=c(min(df$Year),max(df$Year)), ylim=c(min(df$Median.5), max(df$Median.5)), xlab='Reference publication year', ylab='Median deviation of the number of cited references', ...)
+  }
+  if(plot_NCR && plot_Med) {
+     points(df$Year, df$Median.5, type='p', pch=par_pch, col=col_med, ...)
+  }
   abline(h=0,col="black")
-  lines(ncr, col=col_cr, ...)
-  lines(med5, col=col_med, ...)
+  if(plot_NCR) {
+     lines(ncr, col=col_cr, ...)
+  }
+  if(plot_Med) {
+     lines(med5, col=col_med, ...)
+  }
 }
 
