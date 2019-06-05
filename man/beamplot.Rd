@@ -24,7 +24,7 @@ Only the argument wos_file is mandatory. The argument do_weight is optional and 
 
 Literature:
 
-- Haunschild, R., Bornmann, L., & Adams, J. (2019). R package for producing beamplots as a preferred alternative to the h index when assessing single researchers (based on downloads from Web of Science), preprint: https://arxiv.org/abs/1905.09095
+- Haunschild, R., Bornmann, L., & Adams, J. (2019). R package for producing beamplots as a preferred alternative to the h index when assessing single researchers (based on downloads from Web of Science), Scientometrics, DOI 10.1007/s11192-019-03147-3, preprint: https://arxiv.org/abs/1905.09095
 }
 \examples{
 

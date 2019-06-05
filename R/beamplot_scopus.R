@@ -2,19 +2,19 @@
 # beamplot.R
 # Author: Dr. Robin Haunschild
 # Version: 0.0.1
-# Date: 05/20/2019
+# Date: 06/05/2019
 #
 
-#' @title Create a beamplot using raw citations from a WoS download
+#' @title Create a beamplot using raw citations from a Scopus download
 #'
 #' @description
-#' Create a beamplot using raw citations from a WoS download. Use the format
-#' "Other File Format --> Tab-delimited (Win, UTF-8)" and provide the downloaded file name.
-#' a simple weighting of citation counts is also available for comparison of older with newer publications.
+#' Create a beamplot using raw citations from a Scopus download. Use the CSV/Excel format
+#' and provide the downloaded file name.
+#' A simple weighting of citation counts is also available for comparison of older with newer publications.
 #'
 #' @details
-#' beamplot(wos_file="WoS_savedrecs.txt", do_weight=boolean)
-#' Only the argument wos_file is mandatory. The argument do_weight is optional and FALSE by default.
+#' beamplot_scopus(scopus_file="Scopus.csv", do_weight=boolean)
+#' Only the argument scopus_file is mandatory. The argument do_weight is optional and FALSE by default.
 #'
 #' Literature:
 #'
@@ -22,30 +22,26 @@
 #'
 #' @examples
 #'
-#' \dontrun{beamplot("WoS_savedrecs.txt")}
+#' \dontrun{beamplot_scopus("Scopus.csv")}
 #'
-#' @param wos_file is the file name of the downloaded WoS export in the format Tab-delimited (Win, UTF-8).
-#' @param do_weight is a boolean to spcify if citation counts should be weighted with their age. The older the publication, the smaller the weight. The weight depends on on the difference between the year until that citations are counted (i.e., the current calendar year in the case of WoS downloads) and the publication year. A weighting factor of 1 is used for a difference of 0, 1/2 for a difference of 1, ..., and 1/11 for differences of ten or more.
+#' @param scopus_file is the file name of the downloaded Scopus export in the format CSV/Excel.
+#' @param do_weight is a boolean to spcify if citation counts should be weighted with their age. The older the publication, the smaller the weight. The weight depends on on the difference between the year until that citations are counted (i.e., the current calendar year in the case of Scopus downloads) and the publication year. A weighting factor of 1 is used for a difference of 0, 1/2 for a difference of 1, ..., and 1/11 for differences of ten or more.
 #' @param ... further parameters passed to stripchart.
 #'
 #' @export
 
-beamplot <- function(wos_file, do_weight=FALSE, ...) {
+beamplot_scopus <- function(scopus_file, do_weight=FALSE, ...) {
 
-   rd <- read.csv(wos_file, sep='\t', header=FALSE, quote="")
-   fl <- head(rd, 1)
-   rd <- read.csv(wos_file, sep='\t', header=FALSE, quote="", skip=1)
-   fl<-as.matrix(fl)
-   colnames(fl) <- NULL
-   colnames(rd) <- fl
-   cits <- data.frame(rd$PY, rd$TC)
+   df <- read.csv(scopus_file, sep=',', quote='"')
+   cits <- data.frame(df$Year, df$Cited.by)
    colnames(cits) <- c('PY', 'TC')
+   cits[is.na(cits$TC),]$TC <- 0
    xlabel <- 'Number of citations'
 
    if(do_weight) {
   #
   # Simple weighting with age and attenuation after ten years.
-      weights <- as.data.frame(cbind(rd$PY, 0))
+      weights <- as.data.frame(cbind(df$Year, 0))
       colnames(weights) <- c('PY', 'x')
       weights$x <- (as.numeric(format(Sys.time(), "%Y"))-weights$PY+1)
       weights[weights$x>10,]$x <- 11

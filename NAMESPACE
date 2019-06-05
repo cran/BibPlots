@@ -9,6 +9,7 @@ importFrom("utils", "head", "read.csv", "tail")
 
 export(DAMBibPlot)
 export(beamplot)
+export(beamplot_scopus)
 export(jpscatter)
 export(ncr_comp)
 export(rpys)

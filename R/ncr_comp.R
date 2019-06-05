@@ -35,27 +35,6 @@
 #'
 #' @export
 
-fit_ncr <- function(df, type="NCR") {
-  if(type=="Med") {
-    df$NCR <- df$Median.5
-  }
-  lyear <- tail(df$Year, 1)
-  dftmp <- data.frame(lyear+1.0, 0, 0)
-  colnames(dftmp) <- colnames(df)
-  df <- rbind(df, dftmp)
-  
-  # Splines fit without NCR line in negative NCR regime
-  ncr <- spline(df$Year, df$NCR, method="periodic", n=10*length(df$NCR))
-  if(type=="NCR") {
-    ncr$y[ncr$y<0] <- 0
-  }
-  ncr_max <- length(ncr$x)-10
-  ncr$x <- ncr$x[1:ncr_max]
-  ncr$y <- ncr$y[1:ncr_max]
-  df <- df[df$Year<lyear+1, ]
-  return(ncr)
-}
-
 ncr_comp <- function(df1, df2, py1, py2, col_cr = "red", smoothing = TRUE, par_pch = 20, ...) {
     df1$Median.5 <- 0
     df2$Median.5 <- 0
@@ -112,5 +91,26 @@ ncr_comp <- function(df1, df2, py1, py2, col_cr = "red", smoothing = TRUE, par_p
        plot(df2f, type = 'l', lty = 3, col = col_cr, ylab = 'Number of cited references', xlab = 'Reference publication year', ...)
        lines(df1f, lty = 1, col = col_cr)
     }
+}
+
+fit_ncr <- function(df, type="NCR") {
+  if(type=="Med") {
+    df$NCR <- df$Median.5
+  }
+  lyear <- tail(df$Year, 1)
+  dftmp <- data.frame(lyear+1.0, 0, 0)
+  colnames(dftmp) <- colnames(df)
+  df <- rbind(df, dftmp)
+  
+  # Splines fit without NCR line in negative NCR regime
+  ncr <- spline(df$Year, df$NCR, method="periodic", n=10*length(df$NCR))
+  if(type=="NCR") {
+    ncr$y[ncr$y<0] <- 0
+  }
+  ncr_max <- length(ncr$x)-10
+  ncr$x <- ncr$x[1:ncr_max]
+  ncr$y <- ncr$y[1:ncr_max]
+  df <- df[df$Year<lyear+1, ]
+  return(ncr)
 }
 
