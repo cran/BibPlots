@@ -4,16 +4,25 @@
 \alias{rpys}
 \title{Create a spectrogram using data from the free software CRExplorer}
 \usage{
-rpys(df, py1, py2, col_cr = "red", col_med = "blue",
-  smoothing = TRUE, par_pch = 20, plot_NCR = TRUE, plot_Med = TRUE,
-  ...)
+rpys(
+  df,
+  py1 = min(df$Year),
+  py2 = max(df$Year),
+  col_cr = "red",
+  col_med = "blue",
+  smoothing = TRUE,
+  par_pch = 20,
+  plot_NCR = TRUE,
+  plot_Med = TRUE,
+  ...
+)
 }
 \arguments{
 \item{df}{data frame with reference publication year, number of cited references, and median deviation as exported from the CRExplorer (File > Export > CSV (Graph)).}
 
-\item{py1}{determines lowest reference publication year which should be shown in the graph.}
+\item{py1}{determines lowest reference publication year which should be shown in the graph (optional parameter).}
 
-\item{py2}{determines highest reference publication year which should be shown in the graph.}
+\item{py2}{determines highest reference publication year which should be shown in the graph (optional parameter).}
 
 \item{col_cr}{character color name value to determine color of the line and points of the number of cited references (optional parameter). The default value is "red".}
 
@@ -38,11 +47,12 @@ The function rpys takes some optional arguments to modify its behaviour, see arg
 }
 \details{
 rpys(df=data_frame, py1=integer_value, py2=integer_value, smoothing=boolean, col_cr=character_color_name, col_med=character_color_name, par_pch=integer, plot_NCR=boolean, plot_Med=boolean, ...)
-Only the arguments df, py1, and py2 are necessary. All other aruments are optional.
+Only the argument df is necessary. All other aruments are optional.
 
 Literature:
 
-- Thor, A., Bornmann, L., Marx, W., Haunschild, R., Leydesdorff, L., & Mutz, Ruediger (2017). Website of the free software 'CRExplorer', http://www.crexplorer.net
+- Thor, A., Bornmann, L., & Haunschild, R. (2021). Website of the free software 'CRExplorer', http://www.crexplorer.net
+- Thor, A., Bornmann, L., & Haunschild, R. (2018). CitedReferencesExplorer (CRExplorer) manual. Retrieved December 19, 2019, from https://andreas-thor.github.io/cre/manual.pdf
 
 An example data frame is provided as \code{rpys_example_data} in the package. It can be used to create an example spectrogram.
 }

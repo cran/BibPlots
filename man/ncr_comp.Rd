@@ -4,8 +4,16 @@
 \alias{ncr_comp}
 \title{Create a spectrogram using data from the free software CRExplorer}
 \usage{
-ncr_comp(df1, df2, py1, py2, col_cr = "red", smoothing = TRUE,
-  par_pch = 20, ...)
+ncr_comp(
+  df1,
+  df2,
+  py1,
+  py2,
+  col_cr = "red",
+  smoothing = TRUE,
+  par_pch = 20,
+  ...
+)
 }
 \arguments{
 \item{df1}{data frame 1 with reference publication year and number of cited references, e. g., as exported from the CRExplorer (File > Export > CSV (Graph)).}

@@ -5,8 +5,14 @@
 \alias{DAMBibPlot}
 \title{Create a difference against mean plot using journal and paper percentile values}
 \usage{
-DAMBibPlot(df, off_set = 0, print_stats = TRUE, do_plot = TRUE,
-  digits = 1, ...)
+DAMBibPlot(
+  df,
+  off_set = 0,
+  print_stats = TRUE,
+  do_plot = TRUE,
+  digits = 1,
+  ...
+)
 }
 \arguments{
 \item{df}{data frame with journal and paper percentiles}
