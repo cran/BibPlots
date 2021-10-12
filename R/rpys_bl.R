@@ -1,22 +1,22 @@
 #
 # rpys_bl.R
 # Author: Dr. Robin Haunschild
-# Version: 0.0.1
-# Date: 08/18/2021
+# Version: 0.0.2
+# Date: 10/07/2021
 #
 
 #' @title Create a spectrogram with bars and lines using data from the free software CRExplorer
 #'
 #' @description
-#' Provide the contents of the CSV file from the 'CRExplorer' in a data frame, e.g. df,
-#' and the function call rpys_bl(df) creates a spectrogram. Previously, you should use
+#' Provide the contents of the CSV (Graph) file from the 'CRExplorer' in a data frame, e.g. df,
+#' and the function call \link{rpys_bl}(df) creates a spectrogram. Previously, you should use
 #' the function \link{rpys} for a plain line graph to determin the proper parameters, e.g., x_offset and x_range.
 #' Determination of the proper x_offset and x_range is a bit tricky.
 #' Usage of a wrong value of x_range will cause an error. Usage of a wrong value of x_offset will produce
-#' a plot. However, the line for the median deviation might not be at the proper location.
-#' First, adjust x_range if necessary, and second, adjust x_offset so that the median deviation is shown
-#' at the proper location. Comapare with your data and the plot from the function \link{rpys}.
-#' The function rpys_bl takes some optional arguments to modify its behaviour, see arguments and details.
+#' a plot. However, the line for the median deviation and the bars might not be at the proper location.
+#' First, adjust x_range if necessary, and second, adjust x_offset so that the x axis is properly aligned
+#' with the line and bars. Comapare the plot from \link{rpys_bl} with your data and the plot from the function \link{rpys}.
+#' The function \link{rpys_bl} takes some optional arguments to modify its behaviour, see arguments and details.
 #'
 #' @details
 #' rpys_bl(df=data_frame, py1=integer_value, py2=integer_value, x_range=integer_value, smoothing=boolean, 
@@ -157,11 +157,11 @@ rpys_bl <- function(df, py1=min(df$Year), py2=max(df$Year), x_range=py2-py1+1,
    if(plot_Med) {
       if(plot_NCR) { 
          par(new = TRUE)
-         plot(x = df_med$Year, y = df_med$NCR, type = "l", col = col_med, lwd=1.5, axes = FALSE, xlab = "Reference publication year", ylab = "Number of cited references", ...)
+         plot(x = df_med$Year, y = df_med$NCR, type = "l", col = col_med, lwd=1.5, axes = FALSE, xlab = "Reference publication year", ylab = "Number of cited references", ylim=c(y2_min, y2_max), ...)
          axis(4, at = seq(y2_min, y2_max, y2_step), labels = seq(y2_min, y2_max, y2_step), col=col_med, col.axis=col_med)
          mtext("Five-year-median deviation", side = 4, line = 3, cex = par("cex.lab"), col=col_med)
       } else {
-           plot(x = df_med$Year, y = df_med$NCR, type = "l", col = col_med, lwd=1.5, axes = TRUE, xlab = "Reference publication year", ylab = "Five-year-median deviation", ...)
+           plot(x = df_med$Year, y = df_med$NCR, type = "l", col = col_med, lwd=1.5, axes = TRUE, xlab = "Reference publication year", ylab = "Five-year-median deviation", ylim=c(y2_min, y2_max), ...)
       }
       abline(h=0, lty='dotted', col=col_med)
       if(outliers>0) {

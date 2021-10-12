@@ -108,15 +108,15 @@ Values of 1, 2, 3, and 4, respectively indicate positions below, to the left of,
 \item{...}{additional arguments to pass to the \link{plot} function.}
 }
 \description{
-Provide the contents of the CSV file from the 'CRExplorer' in a data frame, e.g. df,
-and the function call rpys_bl(df) creates a spectrogram. Previously, you should use
+Provide the contents of the CSV (Graph) file from the 'CRExplorer' in a data frame, e.g. df,
+and the function call \link{rpys_bl}(df) creates a spectrogram. Previously, you should use
 the function \link{rpys} for a plain line graph to determin the proper parameters, e.g., x_offset and x_range.
 Determination of the proper x_offset and x_range is a bit tricky.
 Usage of a wrong value of x_range will cause an error. Usage of a wrong value of x_offset will produce
-a plot. However, the line for the median deviation might not be at the proper location.
-First, adjust x_range if necessary, and second, adjust x_offset so that the median deviation is shown
-at the proper location. Comapare with your data and the plot from the function \link{rpys}.
-The function rpys_bl takes some optional arguments to modify its behaviour, see arguments and details.
+a plot. However, the line for the median deviation and the bars might not be at the proper location.
+First, adjust x_range if necessary, and second, adjust x_offset so that the x axis is properly aligned
+with the line and bars. Comapare the plot from \link{rpys_bl} with your data and the plot from the function \link{rpys}.
+The function \link{rpys_bl} takes some optional arguments to modify its behaviour, see arguments and details.
 }
 \details{
 rpys_bl(df=data_frame, py1=integer_value, py2=integer_value, x_range=integer_value, smoothing=boolean, 

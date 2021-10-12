@@ -40,7 +40,7 @@ rpys(
 \item{...}{additional arguments to pass to the \link{plot}, \link{points}, and \link{lines} functions.}
 }
 \description{
-Provide the contents of the CSV file from the 'CRExplorer' in a data frame, e.g. df,
+Provide the contents of the CSV (Graph) file from the 'CRExplorer' in a data frame, e.g. df,
 and the function call rpys(df, py1, py2) creates the spectrogram.
 Here, py1 and py2 are the lowest and highest publication year to be used in the plot.
 The function rpys takes some optional arguments to modify its behaviour, see arguments and details.
